@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		return (0);
-	init_struct(argv[1]);
+	structure_initialize(argv[1]);
+	printmap(map()->board);
 	return (0);
 }

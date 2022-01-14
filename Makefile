@@ -20,11 +20,12 @@ CC		= clang
 
 CFLAGS		= -Wall -Wextra -Werror
 
-SRC_NAME	= main.c		\
-		  init_struct.c		\
-		  init_map.c		\
-		  utils_clear_memory.c	\
-		  check_map.c
+SRC_NAME	= main.c				\
+		  initialize_structure.c	\
+		  initialize_map.c			\
+		  initialize_map_checker.c	\
+		  exit_game.c				\
+		  debug.c
 
 
 SRC_DIR		= src/

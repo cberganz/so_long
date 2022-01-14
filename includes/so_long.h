@@ -21,12 +21,9 @@
 # include <limits.h>
 # include <stdio.h> // to remove
 
-# define FIRST_OR_LAST_LINE 1
-# define MIDDLE_LINE 2
-
 typedef struct	s_map
 {
-	char	**map;
+	char	**board;
 	int	height;  //hauteur
 	int	width;  //largeur
 	int	count_exit;
@@ -34,15 +31,28 @@ typedef struct	s_map
 	int	count_pos;
 }	t_map;
 
-typedef struct	s_root
-{
-	t_map	*map;
-}	t_root;
+//typedef struct	s_game
+//{
+//
+//}	t_game;
 
-int8_t	init_map(t_map *map, char *fp);
-t_root	*init_struct(char *file_path);
-void	clear_root(t_root *root);
-void	clear_map(t_map *map);
-void	check_map(t_map *map);
+/*
+** Initialise
+*/
+
+void	structure_initialize(char *file_path);
+void	map_initialize(char *file_path);
+void	check_map(void);
+t_map	*map(void);
+
+
+void	printmap(char **board);
+
+/*
+**	Exit game
+*/
+
+void	clear_map(void);
+void	exit_game();
 
 #endif
