@@ -53,6 +53,6 @@ void	printmap(char **board);
 */
 
 void	clear_map(void);
-void	exit_game();
+void	exit_game(int exit, int STD, char *message);
 
 #endif

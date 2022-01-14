@@ -12,14 +12,14 @@ void	clear_map(void)
 			free(map()->board[i]);
 			i++;
 		}
+		free(map()->board);
 	}
-	free(map()->board);
 }
 
-void	exit_game(void)
+void	exit_game(int EXIT_CODE, int STD, char *message)
 {
-	printf("game exited\n");
 	clear_map();
-	exit(EXIT_SUCCESS);
+	ft_putstr_fd(message, STD);
+	exit(EXIT_CODE);
 }
 

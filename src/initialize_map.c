@@ -32,7 +32,7 @@ static void	get_map_formated(char *file_path)
 
 	map()->board = malloc(map()->height * sizeof(char **));
 	if (!map()->board)
-		exit_game();
+		exit_game(EXIT_FAILURE, STDERR_FILENO, "Error\nMemory allocation error.\n");
 	fd = open(file_path, O_RDONLY);
 	i = 0;
 	while ((line = get_next_line(fd)) != NULL)
