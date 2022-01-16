@@ -6,7 +6,7 @@
 #    By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:42:18 by cberganz          #+#    #+#              #
-#    Updated: 2022/01/14 05:06:16 by cberganz         ###   ########.fr        #
+#    Updated: 2022/01/16 00:30:13 by cberganz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ all: ${NAME}
 
 $(NAME): $(OBJ)
 	$(MAKE) -C ./libft/
-	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -o $(NAME) -g3
+	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME) -g3
 
 ${OBJ_DIRS}:
 	mkdir -p $@
@@ -48,7 +48,7 @@ ${OBJ_DIRS}:
 ${OBJ}: | ${OBJ_DIRS}
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c ${HEADER}
-	${CC} ${CFLAGS} -I${INCLUDE} -c $< -o $@ -g3
+	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@ -g3
 
 clean:
 	rm -rf ${OBJ_DIR}
