@@ -12,24 +12,46 @@
 
 #include "../includes/so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+//static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+//{
+//	char	*dst;
+//
+//	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+//	*(unsigned int*)dst = color;
+//}
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+static t_display	*display(void)
+{
+	static t_display	display;
+
+	return (&display);
 }
 
-void	get_image(void)
+static void	new_image(void)
 {
-	void	*mlx;
-	void	*img;
-	char	*relative_path = "./test.xpm";
-	int		img_width;
-	int		img_height;
+	display()->img = mlx_new_image(display()->mlx, display()->screen_height, display()->screen_width);
+	display()->addr = mlx_get_data_addr(display()->img, &display()->bits_per_pixel, &display()->line_length, &display()->endian);
+}
 
-	mlx = mlx_init();
-	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+static void	display_image(void)
+{
+//	void	*img;
+	
+	display()->relative_path = "./test.xpm";
+	display()->img = mlx_xpm_file_to_image(display()->mlx, display()->relative_path, &display()->img_width, &display()->img_height);
+	mlx_put_image_to_window(display()->mlx, display()->mlx_win, display()->img, 0, 0);
+	mlx_put_image_to_window(display()->mlx, display()->mlx_win, display()->img, 0, 451);
+}
+
+static void	init_display(void)
+{
+	display()->screen_height = 1980;
+	display()->screen_width = 1080;
+	display()->mlx = mlx_init();
+	display()->mlx_win = mlx_new_window(display()->mlx, display()->screen_height, display()->screen_width, "Hello world !");
+	new_image();
+	display_image();
+	mlx_loop(display()->mlx);
 }
 
 //void	mlx_test(void)
@@ -53,7 +75,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		return (0);
-	get_image();
+	init_display();
 	structure_initialize(argv[1]);
 	printmap(map()->board);
 	return (0);

@@ -40,7 +40,7 @@ all: ${NAME}
 
 $(NAME): $(OBJ)
 	$(MAKE) -C ./libft/
-	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME) -g3
+	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME) -g3
 
 ${OBJ_DIRS}:
 	mkdir -p $@

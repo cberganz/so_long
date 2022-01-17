@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "../libft/include/libft.h"
-# include <mlx.h>
+# include "../mlx-linux/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -32,13 +32,20 @@ typedef struct	s_map
 	int	count_pos;
 }	t_map;
 
-typedef struct	s_data {
+typedef struct	s_display {
+	void	*mlx;
+	void	*mlx_win;
+	int		screen_height;
+	int		screen_width;
+	char	*relative_path;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+	int		img_height;
+	int		img_width;
+}				t_display;
 
 //typedef struct	s_game
 //{
@@ -53,6 +60,10 @@ void	structure_initialize(char *file_path);
 void	map_initialize(char *file_path);
 void	check_map(void);
 t_map	*map(void);
+
+/*
+**	Display
+*/
 
 
 void	printmap(char **board);
