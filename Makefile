@@ -6,7 +6,7 @@
 #    By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:42:18 by cberganz          #+#    #+#              #
-#    Updated: 2022/01/16 00:30:13 by cberganz         ###   ########.fr        #
+#    Updated: 2022/01/18 15:29:07 by cberganz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_NAME	= main.c				\
 		  initialize_map.c			\
 		  initialize_map_checker.c	\
 		  exit_game.c				\
+		  refresh_game.c		\
 		  debug.c
 
 

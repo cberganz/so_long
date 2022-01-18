@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/16 00:40:22 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:28:49 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@
 # include <stdint.h>
 # include <limits.h>
 # include <stdio.h> // to remove
+
+/*
+**	Tiles
+*/
+
+# define GROUND "./Ressources/ground.xpm"
+# define WALL "./Ressources/wall.xpm"
+# define COLLECTIBLE "./Ressources/collectible.xpm"
+# define DOOR_O "./Ressources/door_open.xpm"
+# define DOOR_C "./Ressources/door_close.xpm"
+# define FORMAT 64
+
 
 typedef struct	s_map
 {
@@ -45,7 +57,20 @@ typedef struct	s_display {
 	int		endian;
 	int		img_height;
 	int		img_width;
-}				t_display;
+}	t_display;
+
+typedef struct	s_tiles {
+	char	*ground;
+	char	*wall;
+	char	*door_open;
+	char	*door_close;
+	char	*character_right;
+	char	*character_left;
+	char	*character_top;
+	char	*character_bottom;
+	char	*collectible;
+	int	format;
+}	t_tiles;
 
 //typedef struct	s_game
 //{
@@ -65,8 +90,10 @@ t_map	*map(void);
 **	Display
 */
 
-
+t_tiles	*tiles(void);
+void	tiles_initialize(void);
 void	printmap(char **board);
+void	init_display(void);
 
 /*
 **	Exit game
