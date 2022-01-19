@@ -29,8 +29,11 @@
 # define GROUND "./Ressources/ground.xpm"
 # define WALL "./Ressources/wall.xpm"
 # define COLLECTIBLE "./Ressources/collectible.xpm"
-# define DOOR_O "./Ressources/door_open.xpm"
-# define DOOR_C "./Ressources/door_close.xpm"
+# define EXIT "./Ressources/exit.xpm"
+# define CHARACTER_FRONT "./Ressources/Character_front.xpm"
+# define CHARACTER_BACK "./Ressources/Character_back.xpm"
+# define CHARACTER_RIGHT "./Ressources/Character_right.xpm"
+# define CHARACTER_LEFT "./Ressources/Character_left.xpm"
 # define FORMAT 64
 
 
@@ -59,19 +62,6 @@ typedef struct	s_display {
 	int		img_width;
 }	t_display;
 
-typedef struct	s_tiles {
-	char	*ground;
-	char	*wall;
-	char	*door_open;
-	char	*door_close;
-	char	*character_right;
-	char	*character_left;
-	char	*character_top;
-	char	*character_bottom;
-	char	*collectible;
-	int	format;
-}	t_tiles;
-
 //typedef struct	s_game
 //{
 //
@@ -90,10 +80,15 @@ t_map	*map(void);
 **	Display
 */
 
-t_tiles	*tiles(void);
-void	tiles_initialize(void);
 void	printmap(char **board);
 void	init_display(void);
+t_display	*display(void);
+
+/*
+**	Game loop
+*/
+
+void	game_loop(void);
 
 /*
 **	Exit game

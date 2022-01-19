@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-static t_display	*display(void)
+t_display	*display(void)
 {
 	static t_display	display;
 
@@ -47,15 +47,22 @@ static void	display_map(void)
 			else if (map()->board[i][j] == '0')
 				display_image(GROUND, j, i);
 			else if (map()->board[i][j] == 'E')
-				display_image(DOOR_C, j, i);
-			else if (map()->board[i][j] == 'O')
-				display_image(DOOR_O, j, i);
+				display_image(EXIT, j, i);
 			else if (map()->board[i][j] == 'C')
 				display_image(COLLECTIBLE, j, i);
+			else if (map()->board[i][j] == 'P')
+				display_image(CHARACTER_FRONT, j, i);
 			j++;
 		}
 		i++;
 	}
+}
+
+int	key_hook(int keycode, t_display *display)
+{
+	printf("key:%d\n", keycode);
+	(void)display;
+	return (0);
 }
 
 void	init_display(void)
@@ -66,5 +73,7 @@ void	init_display(void)
 	display()->mlx_win = mlx_new_window(display()->mlx, display()->screen_width, display()->screen_height, "So_Long");
 	new_image();
 	display_map();
+//	game_loop();
+	mlx_key_hook(display()->mlx_win, key_hook, display());
 	mlx_loop(display()->mlx);
 }

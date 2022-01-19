@@ -25,7 +25,8 @@ SRC_NAME	= main.c				\
 		  initialize_map.c			\
 		  initialize_map_checker.c	\
 		  exit_game.c				\
-		  refresh_game.c		\
+		  refresh_game.c			\
+		  game_loop.c				\
 		  debug.c
 
 
