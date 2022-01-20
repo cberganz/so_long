@@ -28,9 +28,29 @@ void	clear_map(void)
 	}
 }
 
+void	clear_img(void)
+{
+	if (img())
+	{
+		mlx_destroy_image(display()->mlx, img()->ground);
+		mlx_destroy_image(display()->mlx, img()->wall);
+		mlx_destroy_image(display()->mlx, img()->collectible);
+		mlx_destroy_image(display()->mlx, img()->exit);
+		mlx_destroy_image(display()->mlx, img()->character_front);
+		mlx_destroy_image(display()->mlx, img()->character_left);
+		mlx_destroy_image(display()->mlx, img()->character_right);
+		mlx_destroy_image(display()->mlx, img()->character_left);
+		mlx_destroy_image(display()->mlx, img()->character_current);
+	}
+}
+
 void	exit_game(int EXIT_CODE, int STD, char *message)
 {
 	clear_map();
+	mlx_destroy_image(display()->mlx, display()->img);
+//	clear_img();
+	mlx_destroy_window(display()->mlx, display()->mlx_win);
+	mlx_destroy_display(display()->mlx);
 	ft_putstr_fd(message, STD);
 	exit(EXIT_CODE);
 }

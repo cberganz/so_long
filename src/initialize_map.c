@@ -40,19 +40,19 @@ static void	get_map_formated(char *file_path)
 {
 	char	*line;
 	int	fd;
-	int	i;
+	int	y;
 
-	map()->board = malloc(map()->height * sizeof(char **));
+	map()->board = malloc((map()->height + 1) * sizeof(char **));
 	if (!map()->board)
 		exit_game(EXIT_FAILURE, STDERR_FILENO, "Error\nMemory allocation error.\n");
 	fd = open(file_path, O_RDONLY);
-	i = 0;
+	y = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		map()->board[i] = line;
-		i++;
+		map()->board[y] = line;
+		y++;
 	}
-	map()->board[i] = NULL;
+	map()->board[y] = NULL;
 	close(fd);
 }
 

@@ -27,6 +27,8 @@ SRC_NAME	= main.c				\
 		  exit_game.c				\
 		  refresh_game.c			\
 		  game_loop.c				\
+		  game_moves.c				\
+		  initialize_game.c			\
 		  debug.c
 
 

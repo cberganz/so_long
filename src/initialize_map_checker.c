@@ -12,17 +12,21 @@
 
 #include "../includes/so_long.h"
 
-static void	isvalid_border(int i, int j)
+static void	isvalid_border(int y, int x)
 {
-	if ((i == 0 || i == map()->height - 1 || j == 0 || j == map()->width - 1)
-		&& map()->board[i][j] != '1')
+	if ((y == 0 || y == map()->height - 1 || x == 0 || x == map()->width - 1)
+		&& map()->board[y][x] != '1')
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nMap borders are not clear.\n");
 }
 
-static void	isvalid_char(char c)
+static void	isvalid_char(char c, int y, int x)
 {
 	if (c == 'P')
+	{
 		map()->count_pos++;
+		game()->p_pos_x = x;
+		game()->p_pos_y = y;
+	}
 	else if (c == 'E')
 		map()->count_exit++;
 	else if (c == 'C')
@@ -35,24 +39,24 @@ static void	isvalid_char(char c)
 
 void	check_map(void)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
 	if (map()->height == map()->width)
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nMap is a square.\n");
-	i = 0;
-	while (map()->board[i])
+	y = 0;
+	while (map()->board[y])
 	{
-		j = 0;
-		while (map()->board[i][j])
+		x = 0;
+		while (map()->board[y][x])
 		{
-			isvalid_char(map()->board[i][j]);
-			isvalid_border(i, j);
-			j++;
+			isvalid_char(map()->board[y][x], y, x);
+			isvalid_border(y, x);
+			x++;
 		}
-		if (j != map()->width)
+		if (x != map()->width)
 			exit_game(EXIT_SUCCESS, STDERR_FILENO,"Error\nMap rows must have the same width.\n");
-		i++;
+		y++;
 	}
 	if (map()->count_pos > 1 || map()->count_pos < 0)
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nInvalid number of start positions in map.\n");

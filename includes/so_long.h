@@ -22,20 +22,10 @@
 # include <limits.h>
 # include <stdio.h> // to remove
 
-/*
-**	Tiles
-*/
-
-# define GROUND "./Ressources/ground.xpm"
-# define WALL "./Ressources/wall.xpm"
-# define COLLECTIBLE "./Ressources/collectible.xpm"
-# define EXIT "./Ressources/exit.xpm"
-# define CHARACTER_FRONT "./Ressources/Character_front.xpm"
-# define CHARACTER_BACK "./Ressources/Character_back.xpm"
-# define CHARACTER_RIGHT "./Ressources/Character_right.xpm"
-# define CHARACTER_LEFT "./Ressources/Character_left.xpm"
-# define FORMAT 64
-
+# define RIGHT 1
+# define LEFT 2
+# define TOP 3
+# define BOTTOM 4
 
 typedef struct	s_map
 {
@@ -52,7 +42,6 @@ typedef struct	s_display {
 	void	*mlx_win;
 	int		screen_height;
 	int		screen_width;
-	char	*relative_path;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -62,10 +51,30 @@ typedef struct	s_display {
 	int		img_width;
 }	t_display;
 
-//typedef struct	s_game
-//{
-//
-//}	t_game;
+typedef struct	s_game
+{
+	int	p_pos_x;
+	int	p_pos_y;
+	int	count_coll;
+	int	collected_coll;
+	int	count_movements;
+}	t_game;
+
+typedef struct	s_img
+{
+	void	*ground;
+	void	*wall;
+	void	*collectible;
+	void	*exit;
+	void	*character_front;
+	void	*character_back;
+	void	*character_right;
+	void	*character_left;
+	void	*character_current;
+	int		img_height;
+	int		img_width;
+	int		format;
+}	t_img;
 
 /*
 ** Initialise
@@ -75,6 +84,8 @@ void	structure_initialize(char *file_path);
 void	map_initialize(char *file_path);
 void	check_map(void);
 t_map	*map(void);
+t_game	*game(void);
+void	game_initialize(void);
 
 /*
 **	Display
@@ -89,6 +100,11 @@ t_display	*display(void);
 */
 
 void	game_loop(void);
+void	move_right(void);
+void	move_left(void);
+void	move_top(void);
+void	move_bottom(void);
+t_img	*img(void);
 
 /*
 **	Exit game
