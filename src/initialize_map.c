@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:23:13 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/18 14:16:29 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:02:19 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,32 @@ t_map	*map(void)
 	return (&map);
 }
 
+static uint8_t	is_not_ber(char *path)
+{
+	int	len;
+
+	len = ft_strlen(path);
+	if (ft_strcmp(path + len - 4, ".ber"))
+		return (1);
+	else
+		return (0);
+}
+
 static void	get_map_info(char *file_path)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	map()->height = 0;
 	fd = open(file_path, O_RDONLY);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (map()->height == 0)
 			map()->width = (int)ft_strlen(line);
 		map()->height++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 }
@@ -39,18 +52,21 @@ static void	get_map_info(char *file_path)
 static void	get_map_formated(char *file_path)
 {
 	char	*line;
-	int	fd;
-	int	y;
+	int		fd;
+	int		y;
 
 	map()->board = malloc((map()->height + 1) * sizeof(char **));
 	if (!map()->board)
-		exit_game(EXIT_FAILURE, STDERR_FILENO, "Error\nMemory allocation error.\n");
+		exit_game(EXIT_FAILURE, STDERR_FILENO,
+			"Error\nMemory allocation error.\n");
 	fd = open(file_path, O_RDONLY);
 	y = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line)
 	{
 		map()->board[y] = line;
 		y++;
+		line = get_next_line(fd);
 	}
 	map()->board[y] = NULL;
 	close(fd);
@@ -58,6 +74,11 @@ static void	get_map_formated(char *file_path)
 
 void	map_initialize(char *file_path)
 {
+	if (is_not_ber(file_path))
+	{
+		write(2, "Error.\nInvalid map format. \".ber\" map required.\n", 48);
+		exit(EXIT_SUCCESS);
+	}
 	get_map_info(file_path);
 	get_map_formated(file_path);
 	check_map();

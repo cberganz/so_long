@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize_game.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 14:11:32 by cberganz          #+#    #+#             */
+/*   Updated: 2022/01/20 18:02:17 by cberganz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 t_game	*game(void)
@@ -14,19 +26,24 @@ t_img	*img(void)
 	return (&img);
 }
 
+static void	load_texture(t_tex *t, char *path)
+{
+	t->img = mlx_xpm_file_to_image(display()->mlx, path, &t->width, &t->height);
+	t->addr = mlx_get_data_addr(t->img, &t->bits_per_pixel,
+			&t->line_length, &t->endian);
+}
+
 static void	img_initialize(void)
 {
 	img()->format = 64;
-	img()->img_height = img()->format;
-	img()->img_width = img()->format;
-	img()->ground = mlx_xpm_file_to_image(display()->mlx, "./Ressources/ground.xpm", &img()->img_width, &img()->img_height);
-	img()->wall = mlx_xpm_file_to_image(display()->mlx, "./Ressources/wall.xpm", &img()->img_width, &img()->img_height);
-	img()->collectible = mlx_xpm_file_to_image(display()->mlx, "./Ressources/collectible.xpm", &img()->img_width, &img()->img_height);
-	img()->exit = mlx_xpm_file_to_image(display()->mlx, "./Ressources/exit.xpm", &img()->img_width, &img()->img_height);
-	img()->character_front = mlx_xpm_file_to_image(display()->mlx, "./Ressources/Character_front.xpm", &img()->img_width, &img()->img_height);
-	img()->character_back = mlx_xpm_file_to_image(display()->mlx, "./Ressources/Character_back.xpm", &img()->img_width, &img()->img_height);
-	img()->character_right = mlx_xpm_file_to_image(display()->mlx, "./Ressources/Character_right.xpm", &img()->img_width, &img()->img_height);
-	img()->character_left = mlx_xpm_file_to_image(display()->mlx, "./Ressources/Character_left.xpm", &img()->img_width, &img()->img_height);
+	load_texture(&img()->ground, "./Ressources/ground.xpm");
+	load_texture(&img()->wall, "./Ressources/wall.xpm");
+	load_texture(&img()->collectible, "./Ressources/collectible.xpm");
+	load_texture(&img()->exit, "./Ressources/exit.xpm");
+	load_texture(&img()->character_front, "./Ressources/Character_front.xpm");
+	load_texture(&img()->character_back, "./Ressources/Character_back.xpm");
+	load_texture(&img()->character_right, "./Ressources/Character_right.xpm");
+	load_texture(&img()->character_left, "./Ressources/Character_left.xpm");
 	img()->character_current = img()->character_front;
 }
 

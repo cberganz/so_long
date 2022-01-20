@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 04:50:00 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/18 11:51:09 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:02:22 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	isvalid_border(int y, int x)
 {
 	if ((y == 0 || y == map()->height - 1 || x == 0 || x == map()->width - 1)
 		&& map()->board[y][x] != '1')
-		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nMap borders are not clear.\n");
+		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_BORDERS);
 }
 
 static void	isvalid_char(char c, int y, int x)
@@ -34,7 +34,7 @@ static void	isvalid_char(char c, int y, int x)
 	else if (c == '1' || c == '0')
 		return ;
 	else
-		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nInvalid character in map.\n");
+		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_INVALIDCHAR);
 }
 
 void	check_map(void)
@@ -42,8 +42,6 @@ void	check_map(void)
 	int	x;
 	int	y;
 
-	if (map()->height == map()->width)
-		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nMap is a square.\n");
 	y = 0;
 	while (map()->board[y])
 	{
@@ -55,13 +53,13 @@ void	check_map(void)
 			x++;
 		}
 		if (x != map()->width)
-			exit_game(EXIT_SUCCESS, STDERR_FILENO,"Error\nMap rows must have the same width.\n");
+			exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_WIDTH);
 		y++;
 	}
 	if (map()->count_pos > 1 || map()->count_pos < 0)
-		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nInvalid number of start positions in map.\n");
+		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_STARTP);
 	if (map()->count_exit > 1 || map()->count_exit < 1)
-		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nInvalid number of exits in map.\n");
+		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_EXIT);
 	if (map()->count_obj < 1)
-		exit_game(EXIT_SUCCESS, STDERR_FILENO, "Error\nNo collectibles in map.\n");
+		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_NOCOLL);
 }

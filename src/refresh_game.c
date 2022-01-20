@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:19 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/18 15:41:47 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:02:28 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,9 @@ t_display	*display(void)
 	return (&display);
 }
 
-static void	new_image(void)
+static void	display_image(t_tex *t, int i, int j)
 {
-	display()->img = mlx_new_image(display()->mlx, display()->screen_height, display()->screen_width);
-	display()->addr = mlx_get_data_addr(display()->img, &display()->bits_per_pixel, &display()->line_length, &display()->endian);
-}
-
-static void	display_image(void *tile, int i, int j)
-{
-	mlx_put_image_to_window(display()->mlx, display()->mlx_win, tile, i * img()->format, j * img()->format);
+	mlx_put_image_to_window(display()->mlx, display()->mlx_win, t->img, i * img()->format, j * img()->format);
 }
 
 static void	display_map(void)
@@ -42,15 +36,15 @@ static void	display_map(void)
 		while (map()->board[i][j])
 		{
 			if (map()->board[i][j] == '1')
-				display_image(img()->wall, j, i);
+				display_image(&img()->wall, j, i);
 			else if (map()->board[i][j] == '0')
-				display_image(img()->ground, j, i);
+				display_image(&img()->ground, j, i);
 			else if (map()->board[i][j] == 'E')
-				display_image(img()->exit, j, i);
+				display_image(&img()->exit, j, i);
 			else if (map()->board[i][j] == 'C')
-				display_image(img()->collectible, j, i);
+				display_image(&img()->collectible, j, i);
 			else if (map()->board[i][j] == 'P')
-				display_image(img()->character_current, j, i);
+				display_image(&img()->character_current, j, i);
 			j++;
 		}
 		i++;
@@ -77,14 +71,13 @@ int	key_hook(int keycode, t_display *display)
 
 void	init_display(void)
 {
-	display()->screen_height = map()->height * 64/* img()->format*/;
-	display()->screen_width = map()->width * 64/*img()->format*/;
 	display()->mlx = mlx_init();
-	display()->mlx_win = mlx_new_window(display()->mlx, display()->screen_width, display()->screen_height, "So_Long");
-	new_image();
 	game_initialize();
+	display()->screen_height = map()->height * img()->format;
+	display()->screen_width = map()->width * img()->format;
+	display()->mlx_win = mlx_new_window(display()->mlx, display()->screen_width, display()->screen_height, "./so_long");
+	mlx_hook(display()->mlx_win, 17, 0, exit_button, "Game exited by user\n");
 	display_map();
-//	game_loop();
 	mlx_key_hook(display()->mlx_win, key_hook, display());
 	mlx_loop(display()->mlx);
 }

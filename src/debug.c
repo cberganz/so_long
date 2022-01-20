@@ -6,13 +6,13 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:23:57 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/16 00:04:29 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:02:01 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void printmap(char **board)
+void	printmap(char **board)
 {
 	while (*board)
 	{
@@ -20,4 +20,3 @@ void printmap(char **board)
 		board++;
 	}
 }
-

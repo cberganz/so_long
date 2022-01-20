@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/18 15:28:49 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:51:11 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@
 # include <limits.h>
 # include <stdio.h> // to remove
 
-# define RIGHT 1
-# define LEFT 2
-# define TOP 3
-# define BOTTOM 4
+# define ERR_STARTP "Error\nInvalid number of start positions in map.\n"
+# define ERR_WIDTH "Error\nMap rows must have the same width.\n"
+# define ERR_EXIT "Error\nInvalid number of exits in map.\n"
+# define ERR_NOCOLL "Error\nNo collectibles in map.\n"
+# define ERR_STARTP "Error\nInvalid number of start positions in map.\n"
+# define ERR_INVALIDCHAR "Error\nInvalid character in map.\n"
+# define ERR_BORDERS "Error\nMap borders are not clear.\n"
 
 typedef struct	s_map
 {
@@ -42,13 +45,6 @@ typedef struct	s_display {
 	void	*mlx_win;
 	int		screen_height;
 	int		screen_width;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		img_height;
-	int		img_width;
 }	t_display;
 
 typedef struct	s_game
@@ -60,19 +56,28 @@ typedef struct	s_game
 	int	count_movements;
 }	t_game;
 
+typedef struct s_tex
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			height;
+	int			width;
+}	t_tex;
+
 typedef struct	s_img
 {
-	void	*ground;
-	void	*wall;
-	void	*collectible;
-	void	*exit;
-	void	*character_front;
-	void	*character_back;
-	void	*character_right;
-	void	*character_left;
-	void	*character_current;
-	int		img_height;
-	int		img_width;
+	t_tex	ground;
+	t_tex	wall;
+	t_tex	collectible;
+	t_tex	exit;
+	t_tex	character_front;
+	t_tex	character_back;
+	t_tex	character_right;
+	t_tex	character_left;
+	t_tex	character_current;
 	int		format;
 }	t_img;
 
@@ -111,6 +116,7 @@ t_img	*img(void);
 */
 
 void	clear_map(void);
-void	exit_game(int exit, int STD, char *message);
+int	exit_game(int exit, int STD, char *message);
+int	exit_button(char *msg);
 
 #endif

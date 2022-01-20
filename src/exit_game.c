@@ -6,11 +6,17 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:23:51 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/18 11:12:20 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:02:04 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	exit_button(char *msg)
+{
+	exit_game(EXIT_SUCCESS, STDOUT_FILENO, msg);
+	return (0);
+}
 
 void	clear_map(void)
 {
@@ -30,28 +36,25 @@ void	clear_map(void)
 
 void	clear_img(void)
 {
-	if (img())
-	{
-		mlx_destroy_image(display()->mlx, img()->ground);
-		mlx_destroy_image(display()->mlx, img()->wall);
-		mlx_destroy_image(display()->mlx, img()->collectible);
-		mlx_destroy_image(display()->mlx, img()->exit);
-		mlx_destroy_image(display()->mlx, img()->character_front);
-		mlx_destroy_image(display()->mlx, img()->character_left);
-		mlx_destroy_image(display()->mlx, img()->character_right);
-		mlx_destroy_image(display()->mlx, img()->character_left);
-		mlx_destroy_image(display()->mlx, img()->character_current);
-	}
+	mlx_destroy_image(display()->mlx, img()->ground.img);
+	mlx_destroy_image(display()->mlx, img()->wall.img);
+	mlx_destroy_image(display()->mlx, img()->collectible.img);
+	mlx_destroy_image(display()->mlx, img()->exit.img);
+	mlx_destroy_image(display()->mlx, img()->character_front.img);
+	mlx_destroy_image(display()->mlx, img()->character_back.img);
+	mlx_destroy_image(display()->mlx, img()->character_right.img);
+	mlx_destroy_image(display()->mlx, img()->character_left.img);
 }
 
-void	exit_game(int EXIT_CODE, int STD, char *message)
+int	exit_game(int EXIT_CODE, int STD, char *message)
 {
+	clear_img();
 	clear_map();
-	mlx_destroy_image(display()->mlx, display()->img);
-//	clear_img();
 	mlx_destroy_window(display()->mlx, display()->mlx_win);
 	mlx_destroy_display(display()->mlx);
+	mlx_loop_end(display()->mlx);
+	free(display()->mlx);
 	ft_putstr_fd(message, STD);
 	exit(EXIT_CODE);
+	return (0);
 }
-
