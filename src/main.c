@@ -15,8 +15,16 @@
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
-		return (0);
-	structure_initialize(argv[1]);
-	init_display();
-	return (0);
+	{
+		ft_putstr_fd(ERR_ARGS, 2);
+		return (EXIT_SUCCESS);
+	}
+	map_initialize(argv[1]);
+	w()->mlx = mlx_init();
+	img_initialize();
+	window_initialize();
+	game_initialize();
+	game_play();
+	mlx_loop(w()->mlx);
+	return (EXIT_SUCCESS);
 }

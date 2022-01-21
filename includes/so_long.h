@@ -22,19 +22,44 @@
 # include <limits.h>
 # include <stdio.h> // to remove
 
-# define ERR_STARTP "Error\nInvalid number of start positions in map.\n"
-# define ERR_WIDTH "Error\nMap rows must have the same width.\n"
-# define ERR_EXIT "Error\nInvalid number of exits in map.\n"
-# define ERR_NOCOLL "Error\nNo collectibles in map.\n"
-# define ERR_STARTP "Error\nInvalid number of start positions in map.\n"
-# define ERR_INVALIDCHAR "Error\nInvalid character in map.\n"
-# define ERR_BORDERS "Error\nMap borders are not clear.\n"
+/*
+** Erro Messages
+*/
+
+# define ERR_ARGS "Error.\nInvalid number of arguments.\n"
+# define ERR_STARTP "Error.\nInvalid number of start positions in map.\n"
+# define ERR_WIDTH "Error.\nMap rows must have the same width.\n"
+# define ERR_EXIT "Error.\nInvalid number of exits in map.\n"
+# define ERR_NOCOLL "Error.\nNo collectibles in map.\n"
+# define ERR_STARTP "Error.\nInvalid number of start positions in map.\n"
+# define ERR_INVALIDCHAR "Error.\nInvalid character in map.\n"
+# define ERR_BORDERS "Error.\nMap borders are not clear.\n"
+# define ERR_MEM "Error.\nMemory error while running malloc().\n"
+# define ERR_BER "Error.\nInvalid map format. \".ber\" map required.\n"
+
+/*
+** Keyboard keys
+*/
+
+# define D 100
+# define A 97
+# define W 119
+# define S 115
+# define RIGHT 65363
+# define LEFT 65361
+# define TOP 65362
+# define BOTTOM 65364
+# define ESC 65307
+
+/*
+**	Structures
+*/
 
 typedef struct	s_map
 {
-	char	**board;
-	int	height;  //hauteur
-	int	width;  //largeur
+	char	**map;
+	int	height;
+	int	width;
 	int	count_exit;
 	int	count_obj;
 	int	count_pos;
@@ -82,41 +107,47 @@ typedef struct	s_img
 }	t_img;
 
 /*
-** Initialise
+** Initialise map
 */
 
-void	structure_initialize(char *file_path);
 void	map_initialize(char *file_path);
 void	check_map(void);
-t_map	*map(void);
+t_map	*m(void);
+
+/*
+**	Initialize window
+*/
+
+void	window_initialize(void);
+t_display	*w(void);
+
+/*
+**	Initialize img
+*/
+
+void	img_initialize(void);
+t_img	*img(void);
+
+/*
+**	Game
+*/
+
 t_game	*game(void);
 void	game_initialize(void);
-
-/*
-**	Display
-*/
-
-void	printmap(char **board);
-void	init_display(void);
-t_display	*display(void);
-
-/*
-**	Game loop
-*/
-
-void	game_loop(void);
-void	move_right(void);
-void	move_left(void);
-void	move_top(void);
-void	move_bottom(void);
-t_img	*img(void);
+void	game_play(void);
 
 /*
 **	Exit game
 */
 
 void	clear_map(void);
-int	exit_game(int exit, int STD, char *message);
-int	exit_button(char *msg);
+int		exit_game(int exit, int STD, char *message);
+int		exit_button(char *msg);
+
+/*
+**	Utils
+*/
+
+void	print_moves(void);
 
 #endif

@@ -23,37 +23,37 @@ void	clear_map(void)
 	int	i;
 
 	i = 0;
-	if (map())
+	if (m())
 	{
-		while (map()->board[i])
+		while (m()->map[i])
 		{
-			free(map()->board[i]);
+			free(m()->map[i]);
 			i++;
 		}
-		free(map()->board);
+		free(m()->map);
 	}
 }
 
 void	clear_img(void)
 {
-	mlx_destroy_image(display()->mlx, img()->ground.img);
-	mlx_destroy_image(display()->mlx, img()->wall.img);
-	mlx_destroy_image(display()->mlx, img()->collectible.img);
-	mlx_destroy_image(display()->mlx, img()->exit.img);
-	mlx_destroy_image(display()->mlx, img()->character_front.img);
-	mlx_destroy_image(display()->mlx, img()->character_back.img);
-	mlx_destroy_image(display()->mlx, img()->character_right.img);
-	mlx_destroy_image(display()->mlx, img()->character_left.img);
+	mlx_destroy_image(w()->mlx, img()->ground.img);
+	mlx_destroy_image(w()->mlx, img()->wall.img);
+	mlx_destroy_image(w()->mlx, img()->collectible.img);
+	mlx_destroy_image(w()->mlx, img()->exit.img);
+	mlx_destroy_image(w()->mlx, img()->character_front.img);
+	mlx_destroy_image(w()->mlx, img()->character_back.img);
+	mlx_destroy_image(w()->mlx, img()->character_right.img);
+	mlx_destroy_image(w()->mlx, img()->character_left.img);
 }
 
 int	exit_game(int EXIT_CODE, int STD, char *message)
 {
 	clear_img();
 	clear_map();
-	mlx_destroy_window(display()->mlx, display()->mlx_win);
-	mlx_destroy_display(display()->mlx);
-	mlx_loop_end(display()->mlx);
-	free(display()->mlx);
+	mlx_destroy_window(w()->mlx, w()->mlx_win);
+	mlx_destroy_display(w()->mlx);
+	mlx_loop_end(w()->mlx);
+	free(w()->mlx);
 	ft_putstr_fd(message, STD);
 	exit(EXIT_CODE);
 	return (0);

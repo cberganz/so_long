@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-t_map	*map(void)
+t_map	*m(void)
 {
 	static t_map	map;
 
@@ -35,14 +35,14 @@ static void	get_map_info(char *file_path)
 	int		fd;
 	char	*line;
 
-	map()->height = 0;
+	m()->height = 0;
 	fd = open(file_path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (map()->height == 0)
-			map()->width = (int)ft_strlen(line);
-		map()->height++;
+		if (m()->height == 0)
+			m()->width = (int)ft_strlen(line);
+		m()->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -55,20 +55,19 @@ static void	get_map_formated(char *file_path)
 	int		fd;
 	int		y;
 
-	map()->board = malloc((map()->height + 1) * sizeof(char **));
-	if (!map()->board)
-		exit_game(EXIT_FAILURE, STDERR_FILENO,
-			"Error\nMemory allocation error.\n");
+	m()->map = malloc((m()->height + 1) * sizeof(char **));
+	if (!m()->map)
+		exit_game(EXIT_FAILURE, STDERR_FILENO, ERR_MEM);
 	fd = open(file_path, O_RDONLY);
 	y = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		map()->board[y] = line;
+		m()->map[y] = line;
 		y++;
 		line = get_next_line(fd);
 	}
-	map()->board[y] = NULL;
+	m()->map[y] = NULL;
 	close(fd);
 }
 
@@ -76,7 +75,7 @@ void	map_initialize(char *file_path)
 {
 	if (is_not_ber(file_path))
 	{
-		write(2, "Error.\nInvalid map format. \".ber\" map required.\n", 48);
+		ft_putstr_fd(ERR_BER, 2);
 		exit(EXIT_SUCCESS);
 	}
 	get_map_info(file_path);

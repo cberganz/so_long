@@ -21,15 +21,14 @@ CC		= clang
 CFLAGS		= -Wall -Wextra -Werror
 
 SRC_NAME	= main.c				\
-		  initialize_structure.c	\
 		  initialize_map.c			\
 		  initialize_map_checker.c	\
-		  exit_game.c				\
-		  refresh_game.c			\
-		  game_moves.c				\
+		  initialize_window.c		\
+		  initialize_img.c			\
 		  initialize_game.c			\
-		  debug.c
-
+		  game.c					\
+		  exit_game.c				\
+		  utils.c
 
 SRC_DIR		= src/
 SRC		= ${addprefix ${SRC_DIR}, ${SRC_NAME}}

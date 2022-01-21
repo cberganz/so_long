@@ -14,8 +14,8 @@
 
 static void	isvalid_border(int y, int x)
 {
-	if ((y == 0 || y == map()->height - 1 || x == 0 || x == map()->width - 1)
-		&& map()->board[y][x] != '1')
+	if ((y == 0 || y == m()->height - 1 || x == 0 || x == m()->width - 1)
+		&& m()->map[y][x] != '1')
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_BORDERS);
 }
 
@@ -23,14 +23,14 @@ static void	isvalid_char(char c, int y, int x)
 {
 	if (c == 'P')
 	{
-		map()->count_pos++;
+		m()->count_pos++;
 		game()->p_pos_x = x;
 		game()->p_pos_y = y;
 	}
 	else if (c == 'E')
-		map()->count_exit++;
+		m()->count_exit++;
 	else if (c == 'C')
-		map()->count_obj++;
+		m()->count_obj++;
 	else if (c == '1' || c == '0')
 		return ;
 	else
@@ -43,23 +43,23 @@ void	check_map(void)
 	int	y;
 
 	y = 0;
-	while (map()->board[y])
+	while (m()->map[y])
 	{
 		x = 0;
-		while (map()->board[y][x])
+		while (m()->map[y][x])
 		{
-			isvalid_char(map()->board[y][x], y, x);
+			isvalid_char(m()->map[y][x], y, x);
 			isvalid_border(y, x);
 			x++;
 		}
-		if (x != map()->width)
+		if (x != m()->width)
 			exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_WIDTH);
 		y++;
 	}
-	if (map()->count_pos > 1 || map()->count_pos < 0)
+	if (m()->count_pos > 1 || m()->count_pos < 0)
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_STARTP);
-	if (map()->count_exit > 1 || map()->count_exit < 1)
+	if (m()->count_exit > 1 || m()->count_exit < 1)
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_EXIT);
-	if (map()->count_obj < 1)
+	if (m()->count_obj < 1)
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_NOCOLL);
 }
