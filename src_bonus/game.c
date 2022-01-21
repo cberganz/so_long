@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:19 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/21 12:31:12 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:36:59 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@ static void	display_image(t_tex *t, int i, int j)
 {
 	mlx_put_image_to_window(w()->mlx, w()->mlx_win, t->img,
 		i * img()->format, j * img()->format);
+}
+
+void	display_moves(void)
+{
+	char	*toa;
+	char	*string;
+
+	string = ft_strdup("Moves : \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+	toa = ft_itoa(game()->count_movements);
+	string = ft_strcat(string, toa);
+	mlx_string_put(w()->mlx, w()->mlx_win, 10, 10, 0x800080, string);
+	free(toa);
+	free(string);
 }
 
 static void	display_refresh(void)
@@ -43,6 +56,7 @@ static void	display_refresh(void)
 		}
 		i++;
 	}
+	display_moves();
 }
 
 static void	move(int y_mod, int x_mod)
@@ -57,7 +71,7 @@ static void	move(int y_mod, int x_mod)
 		game()->p_pos_x += x_mod;
 		game()->p_pos_y += y_mod;
 		game()->count_movements++;
-		print_moves();
+		//print_moves();
 	}
 	else if (m()->map[game()->p_pos_y][game()->p_pos_x + x_mod] == 'E'
 			&& game()->count_coll == game()->collected_coll)

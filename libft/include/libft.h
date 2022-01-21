@@ -6,7 +6,7 @@
 /*   By: cberganz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:34:47 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/14 00:43:22 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:37:15 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,6 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 char	*get_next_line(int fd);
 char	*ft_join_gnl(char *s1, char *s2);
-int	no_newline_in(char *s);
+int		no_newline_in(char *s);
 
 #endif

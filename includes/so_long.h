@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/20 17:51:11 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:07:24 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 */
 
 # define ERR_ARGS "Error.\nInvalid number of arguments.\n"
+# define ERR_NOMAP "Error.\nInvalid path for map, or map is empty.\n"
 # define ERR_STARTP "Error.\nInvalid number of start positions in map.\n"
 # define ERR_WIDTH "Error.\nMap rows must have the same width.\n"
 # define ERR_EXIT "Error.\nInvalid number of exits in map.\n"
@@ -55,24 +56,25 @@
 **	Structures
 */
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**map;
-	int	height;
-	int	width;
-	int	count_exit;
-	int	count_obj;
-	int	count_pos;
+	int		height;
+	int		width;
+	int		count_exit;
+	int		count_obj;
+	int		count_pos;
 }	t_map;
 
-typedef struct	s_display {
+typedef struct s_display
+{
 	void	*mlx;
 	void	*mlx_win;
 	int		screen_height;
 	int		screen_width;
 }	t_display;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	int	p_pos_x;
 	int	p_pos_y;
@@ -92,7 +94,7 @@ typedef struct s_tex
 	int			width;
 }	t_tex;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	t_tex	ground;
 	t_tex	wall;
@@ -110,44 +112,44 @@ typedef struct	s_img
 ** Initialise map
 */
 
-void	map_initialize(char *file_path);
-void	check_map(void);
-t_map	*m(void);
+void		map_initialize(char *file_path);
+void		check_map(void);
+t_map		*m(void);
 
 /*
 **	Initialize window
 */
 
-void	window_initialize(void);
+void		window_initialize(t_display *w);
 t_display	*w(void);
 
 /*
 **	Initialize img
 */
 
-void	img_initialize(void);
-t_img	*img(void);
+void		img_initialize(void);
+t_img		*img(void);
 
 /*
 **	Game
 */
 
-t_game	*game(void);
-void	game_initialize(void);
-void	game_play(void);
+t_game		*game(void);
+void		game_initialize(void);
+void		game_play(void);
 
 /*
 **	Exit game
 */
 
-void	clear_map(void);
-int		exit_game(int exit, int STD, char *message);
-int		exit_button(char *msg);
+void		clear_map(void);
+int			exit_game(int exit, int STD, char *message);
+int			exit_button(char *msg);
 
 /*
 **	Utils
 */
 
-void	print_moves(void);
+void		print_moves(void);
 
 #endif
