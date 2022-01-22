@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/22 15:11:58 by cberganz          #+#    #+#             */
+/*   Updated: 2022/01/22 15:51:56 by cberganz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long_bonus.h"
 
 t_enemy	*enmy(void)
@@ -30,7 +42,7 @@ static void	place_enemy(void)
 {
 	int	x;
 	int	y;
-	int random;
+	int	random;
 	int	count;
 
 	y = 0;
@@ -70,54 +82,6 @@ void	load_enemy(void)
 	load_texture(&enmy()->frame7, "./Ressources/enemy7.xpm");
 	load_texture(&enmy()->frame8, "./Ressources/enemy8.xpm");
 	enmy()->current = enmy()->frame1;
-}
-
-int	enemy_sprite(int param)
-{
-	static int	i;
-	t_tex	arr[8] = { enmy()->frame1, enmy()->frame2, enmy()->frame3, enmy()->frame4, enmy()->frame5, enmy()->frame6, enmy()->frame7, enmy()->frame8 };
-
-	if (i == 8)
-		i = 0;
-	enmy()->current = arr[i];
-	display_refresh();
-	ft_delay(0.1);
-	i++;
-	(void)param;
-	return (0);
-}
-
-uint8_t	die_zone(void)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (m()->map[y])
-	{
-		x =0;
-		while (m()->map[y][x])
-		{
-			if (m()->map[y][x] == 'e')
-				break ;
-			x++;
-		}
-		if (m()->map[y][x] == 'e')
-			break ;
-		y++;
-	}
-	if (!m()->map[y])
-		return (0);
-	if (m()->map[y + 1][x] == 'P' || m()->map[y + 1][x + 1] == 'P'
-		|| m()->map[y][x + 1] == 'P' || m()->map[y - 1][x + 1] == 'P'
-		|| m()->map[y - 1][x] == 'P' || m()->map[y - 1][x - 1] == 'P'
-		|| m()->map[y][x - 1] == 'P' || m()->map[y + 1][x - 1] == 'P'
-		|| m()->map[y][x] == 'P')
-	{
-		display_image(&img()->character_die, y, x);
-		return (1);
-	}
-	return (0);
 }
 
 void	enemy_patrol(void)

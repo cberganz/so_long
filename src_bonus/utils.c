@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:51:07 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/21 12:33:22 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/22 15:11:44 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	display_moves(void)
 		exit_game(EXIT_FAILURE, STDOUT_FILENO, ERR_MEM);
 	toa = ft_itoa(game()->count_movements);
 	ft_strlcpy(string + 8, toa, 15);
-	mlx_string_put(w()->mlx, w()->mlx_win, 10, 10, 0x000000, string);
+	mlx_string_put(w()->mlx, w()->mlx_win, 20, 20, 0x000000, string);
 	free(toa);
 	free(string);
 }
@@ -32,7 +32,6 @@ void	ft_delay(float seconds)
 	clock_t	start;
 
 	start = clock();
-	while((clock() - start) <= seconds * CLOCKS_PER_SEC)
+	while ((clock() - start) <= seconds * CLOCKS_PER_SEC)
 		;
 }
-

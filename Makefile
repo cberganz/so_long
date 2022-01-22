@@ -6,7 +6,7 @@
 #    By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:42:18 by cberganz          #+#    #+#              #
-#    Updated: 2022/01/21 16:05:37 by cberganz         ###   ########.fr        #
+#    Updated: 2022/01/22 15:16:42 by cberganz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_BONUS_NAME	= main.c			\
 		  game.c					\
 		  exit_game.c				\
 		  enemy.c					\
+		  enemy2.c					\
 		  utils.c
 
 SRC_DIR		= src/

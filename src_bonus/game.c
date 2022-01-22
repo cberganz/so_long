@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:19 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/21 16:36:59 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/22 15:51:29 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	display_refresh(void)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (m()->map[i])
+	i = -1;
+	while (m()->map[++i])
 	{
-		j = 0;
-		while (m()->map[i][j])
+		j = -1;
+		while (m()->map[i][++j])
 		{
 			if (m()->map[i][j] == '1')
 				display_image(&img()->wall, j, i);
@@ -41,15 +41,14 @@ void	display_refresh(void)
 				display_image(&img()->character_current, j, i);
 			else if (m()->map[i][j] == 'e')
 				display_image(&enmy()->current, j, i);
-			j++;
 		}
-		i++;
+		display_moves();
 	}
-	display_moves();
 }
 
-static void	move(int y_mod, int x_mod)
-{	
+static void	move(int y_mod, int x_mod, t_tex c)
+{
+	img()->character_current = c;
 	if (m()->map[game()->p_pos_y + y_mod][game()->p_pos_x + x_mod] == '0' ||
 			m()->map[game()->p_pos_y + y_mod][game()->p_pos_x + x_mod] == 'C')
 	{
@@ -69,25 +68,13 @@ static void	move(int y_mod, int x_mod)
 int	key_hook(int key, t_display *display)
 {
 	if (key == D || key == RIGHT)
-	{
-		img()->character_current = img()->character_right;
-		move(0, 1);
-	}
+		move(0, 1, img()->character_right);
 	else if (key == A || key == LEFT)
-	{
-		img()->character_current = img()->character_left;
-		move(0, -1);
-	}
+		move(0, -1, img()->character_left);
 	else if (key == W || key == TOP)
-	{
-		img()->character_current = img()->character_back;
-		move(-1, 0);
-	}
+		move(-1, 0, img()->character_back);
 	else if (key == S || key == BOTTOM)
-	{
-		img()->character_current = img()->character_front;
-		move(1, 0);
-	}
+		move(1, 0, img()->character_front);
 	else if (key == ESC)
 		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "Game exited by user.\n");
 	enemy_patrol();
