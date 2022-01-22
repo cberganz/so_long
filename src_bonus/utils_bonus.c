@@ -19,7 +19,7 @@ void	display_moves(void)
 
 	string = ft_strdup("Moves :                ");
 	if (!string)
-		exit_game(EXIT_FAILURE, STDOUT_FILENO, ERR_MEM);
+		exit_game(EXIT_FAILURE, STDOUT_FILENO, ERR_MEM, 0);
 	toa = ft_itoa(game()->count_movements);
 	ft_strlcpy(string + 8, toa, 15);
 	mlx_string_put(w()->mlx, w()->mlx_win, 20, 20, 0x000000, string);

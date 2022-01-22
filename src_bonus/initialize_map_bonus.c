@@ -57,7 +57,7 @@ static void	get_map_formated(char *file_path)
 
 	m()->map = malloc((m()->height + 1) * sizeof(char **));
 	if (!m()->map)
-		exit_game(EXIT_FAILURE, STDERR_FILENO, ERR_MEM);
+		exit_game(EXIT_FAILURE, STDERR_FILENO, ERR_MEM, 0);
 	fd = open(file_path, O_RDONLY);
 	y = 0;
 	line = get_next_line(fd);

@@ -10,50 +10,51 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= so_long
+NAME			= so_long
+NAME_BONUS		= so_long_bonus
 
-INCLUDE		= includes/
+INCLUDE			= includes/
 
-HEADER		= ${INCLUDE}so_long.h
+HEADER			= ${INCLUDE}so_long.h
 
-CC		= clang
+CC				= clang
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 
-SRC_NAME	= main.c				\
-		  initialize_map.c			\
-		  initialize_map_checker.c	\
-		  initialize_window.c		\
-		  initialize_img.c			\
-		  initialize_game.c			\
-		  game.c					\
-		  exit_game.c				\
-		  utils.c
+SRC_NAME		= main.c					\
+				  initialize_map.c			\
+				  initialize_map_checker.c	\
+				  initialize_window.c		\
+				  initialize_img.c			\
+				  initialize_game.c			\
+				  game.c					\
+				  exit_game.c				\
+				  utils.c
 
-SRC_BONUS_NAME	= main.c			\
-		  initialize_map.c			\
-		  initialize_map_checker.c	\
-		  initialize_window.c		\
-		  initialize_img.c			\
-		  initialize_game.c			\
-		  game.c					\
-		  exit_game.c				\
-		  enemy.c					\
-		  enemy2.c					\
-		  utils.c
+SRC_BONUS_NAME	= main_bonus.c					\
+				  initialize_map_bonus.c		\
+				  initialize_map_checker_bonus.c\
+				  initialize_window_bonus.c		\
+				  initialize_img_bonus.c		\
+				  initialize_game_bonus.c		\
+				  game_bonus.c					\
+				  exit_game_bonus.c				\
+				  enemy_bonus.c					\
+				  enemy2_bonus.c				\
+				  utils_bonus.c
 
-SRC_DIR		= src/
-SRC		= ${addprefix ${SRC_DIR}, ${SRC_NAME}}
+SRC_DIR			= src/
+SRC				= ${addprefix ${SRC_DIR}, ${SRC_NAME}}
 
-OBJ_DIR		= objs/
-OBJ_DIRS	= ${sort ${dir ${OBJ}}}
-OBJ_NAME	= ${SRC_NAME:.c=.o}
-OBJ		= ${addprefix ${OBJ_DIR}, ${OBJ_NAME}}
+OBJ_DIR			= objs/
+OBJ_DIRS		= ${sort ${dir ${OBJ}}}
+OBJ_NAME		= ${SRC_NAME:.c=.o}
+OBJ				= ${addprefix ${OBJ_DIR}, ${OBJ_NAME}}
 
-SRC_BONUS_DIR		= src_bonus/
+SRC_BONUS_DIR	= src_bonus/
 SRC_BONUS		= ${addprefix ${SRC_BONUS_DIR}, ${SRC_BONUS_NAME}}
 
-OBJ_BONUS_DIR		= objs_bonus/
+OBJ_BONUS_DIR	= objs_bonus/
 OBJ_BONUS_DIRS	= ${sort ${dir ${OBJ_BONUS}}}
 OBJ_BONUS_NAME	= ${SRC_BONUS_NAME:.c=.o}
 OBJ_BONUS		= ${addprefix ${OBJ_BONUS_DIR}, ${OBJ_BONUS_NAME}}
@@ -63,12 +64,14 @@ all: ${NAME}
 $(NAME): $(OBJ)
 	@make -sC ./libft/
 	@make -sC ./mlx-linux/
-	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME) -g3
+	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-bonus: $(OBJ_BONUS)
+$(NAME_BONUS): $(OBJ_BONUS)
 	@make -sC ./libft/
 	@make -sC ./mlx-linux/
-	$(CC) $(CFLAGS) -L./libft ${OBJ_BONUS} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME) -g3
+	$(CC) $(CFLAGS) -L./libft ${OBJ_BONUS} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+
+bonus: $(NAME_BONUS)
 
 ${OBJ_DIRS}:
 	mkdir -p $@
@@ -80,10 +83,10 @@ ${OBJ}: | ${OBJ_DIRS}
 ${OBJ_BONUS}: | ${OBJ_BONUS_DIRS}
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c ${HEADER}
-	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@ -g3
+	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 ${OBJ_BONUS_DIR}%.o: ${SRC_BONUS_DIR}%.c ${HEADER}
-	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@ -g3
+	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
 	@make clean -sC ./libft/
@@ -94,6 +97,7 @@ clean:
 fclean: clean
 	@make fclean -sC ./libft/
 	rm -f ${NAME}
+	rm -f ${NAME_BONUS}
 
 re: fclean all
 

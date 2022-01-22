@@ -62,7 +62,7 @@ static void	move(int y_mod, int x_mod, t_tex c)
 	}
 	else if (m()->map[game()->p_pos_y][game()->p_pos_x + x_mod] == 'E'
 			&& game()->count_coll == game()->collected_coll)
-		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "GAME SUCCESS!");
+		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "GAME SUCCESS!", 5);
 }
 
 int	key_hook(int key, t_display *display)
@@ -76,7 +76,7 @@ int	key_hook(int key, t_display *display)
 	else if (key == S || key == BOTTOM)
 		move(1, 0, img()->character_front);
 	else if (key == ESC)
-		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "Game exited by user.\n");
+		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "Game exited by user.\n", 0);
 	enemy_patrol();
 	display_refresh();
 	(void)display;

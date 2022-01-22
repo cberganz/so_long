@@ -14,7 +14,7 @@
 
 int	exit_button(char *msg)
 {
-	exit_game(EXIT_SUCCESS, STDOUT_FILENO, msg);
+	exit_game(EXIT_SUCCESS, STDOUT_FILENO, msg, 0);
 	return (0);
 }
 
@@ -59,15 +59,17 @@ void	clear_enemy(void)
 	mlx_destroy_image(w()->mlx, enmy()->frame8.img);
 }
 
-int	exit_game(int EXIT_CODE, int STD, char *message)
+int	exit_game(int EXIT_CODE, int STD, char *message, int delay)
 {
+	mlx_loop_end(w()->mlx);
+	display_refresh();
 	clear_map();
 	if (STD != STDERR_FILENO)
 	{
 		clear_img();
 		clear_enemy();
 		mlx_destroy_window(w()->mlx, w()->mlx_win);
-		mlx_loop_end(w()->mlx);
+		ft_delay(delay);
 		mlx_destroy_display(w()->mlx);
 		free(w()->mlx);
 	}

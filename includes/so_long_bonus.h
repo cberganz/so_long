@@ -172,7 +172,7 @@ uint8_t	die_zone(void);
 */
 
 void		clear_map(void);
-int			exit_game(int exit, int STD, char *message);
+int			exit_game(int exit, int STD, char *message, int delay);
 int			exit_button(char *msg);
 
 /*
