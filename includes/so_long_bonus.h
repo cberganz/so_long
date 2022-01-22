@@ -65,6 +65,7 @@ typedef struct s_map
 	int		count_exit;
 	int		count_obj;
 	int		count_pos;
+	int		count_ground;
 }	t_map;
 
 typedef struct s_display

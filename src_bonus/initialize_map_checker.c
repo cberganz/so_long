@@ -31,7 +31,9 @@ static void	isvalid_char(char c, int y, int x)
 		m()->count_exit++;
 	else if (c == 'C')
 		m()->count_obj++;
-	else if (c == '1' || c == '0')
+	else if (c == '0')
+		m()->count_ground++;
+	else if (c == '1')
 		return ;
 	else
 		exit_game(EXIT_SUCCESS, STDERR_FILENO, ERR_INVALIDCHAR);

@@ -31,9 +31,12 @@ static void	place_enemy(void)
 	int	x;
 	int	y;
 	int random;
+	int	count;
 
 	y = 0;
+	count = 0;
 	srand(time(NULL));
+	random = rand() % (m()->count_ground + 1);
 	while (m()->map[y])
 	{
 		x = 0;
@@ -41,8 +44,8 @@ static void	place_enemy(void)
 		{
 			if (m()->map[y][x] == '0')
 			{
-				random = rand() % 101;
-				if (random <= 5)
+				count++;
+				if (count == random)
 				{
 					m()->map[y][x] = 'e';
 					break ;
@@ -120,7 +123,7 @@ uint8_t	die_zone(void)
 void	enemy_patrol(void)
 {
 	srand(time(NULL));
-	if ((rand() % 101) <= 25)
+	if ((rand() % 201) <= game()->count_movements)
 	{
 		del_enemy();
 		place_enemy();
@@ -130,6 +133,4 @@ void	enemy_patrol(void)
 		ft_delay(5);
 		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "GAME OVER!\n");
 	}
-//	load_enemy();
-//	enemy_loop();
 }

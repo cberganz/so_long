@@ -73,6 +73,10 @@ static void	get_map_formated(char *file_path)
 
 void	map_initialize(char *file_path)
 {
+	m()->count_exit = 0;
+	m()->count_obj = 0;
+	m()->count_pos = 0;
+	m()->count_ground = 0;
 	if (is_not_ber(file_path))
 	{
 		ft_putstr_fd(ERR_BER, 2);
