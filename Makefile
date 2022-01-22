@@ -38,6 +38,7 @@ SRC_BONUS_NAME	= main.c			\
 		  initialize_game.c			\
 		  game.c					\
 		  exit_game.c				\
+		  enemy.c					\
 		  utils.c
 
 SRC_DIR		= src/

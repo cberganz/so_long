@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 t_img	*img(void)
 {
@@ -19,7 +19,7 @@ t_img	*img(void)
 	return (&img);
 }
 
-static void	load_texture(t_tex *t, char *path)
+void	load_texture(t_tex *t, char *path)
 {
 	t->img = mlx_xpm_file_to_image(w()->mlx, path, &t->width, &t->height);
 	t->addr = mlx_get_data_addr(t->img, &t->bits_per_pixel,
@@ -37,5 +37,6 @@ void	img_initialize(void)
 	load_texture(&img()->character_back, "./Ressources/Character_back.xpm");
 	load_texture(&img()->character_right, "./Ressources/Character_right.xpm");
 	load_texture(&img()->character_left, "./Ressources/Character_left.xpm");
+	load_texture(&img()->character_die, "./Ressources/Character_die.xpm");
 	img()->character_current = img()->character_front;
 }

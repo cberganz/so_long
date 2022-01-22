@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	exit_button(char *msg)
 {
@@ -44,6 +44,19 @@ void	clear_img(void)
 	mlx_destroy_image(w()->mlx, img()->character_back.img);
 	mlx_destroy_image(w()->mlx, img()->character_right.img);
 	mlx_destroy_image(w()->mlx, img()->character_left.img);
+	mlx_destroy_image(w()->mlx, img()->character_die.img);
+}
+
+void	clear_enemy(void)
+{
+	mlx_destroy_image(w()->mlx, enmy()->frame1.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame2.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame3.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame4.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame5.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame6.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame7.img);
+	mlx_destroy_image(w()->mlx, enmy()->frame8.img);
 }
 
 int	exit_game(int EXIT_CODE, int STD, char *message)
@@ -52,6 +65,7 @@ int	exit_game(int EXIT_CODE, int STD, char *message)
 	if (STD != STDERR_FILENO)
 	{
 		clear_img();
+		clear_enemy();
 		mlx_destroy_window(w()->mlx, w()->mlx_win);
 		mlx_loop_end(w()->mlx);
 		mlx_destroy_display(w()->mlx);

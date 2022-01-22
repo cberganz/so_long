@@ -10,28 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
-static void	display_image(t_tex *t, int i, int j)
+void	display_image(t_tex *t, int i, int j)
 {
 	mlx_put_image_to_window(w()->mlx, w()->mlx_win, t->img,
 		i * img()->format, j * img()->format);
 }
 
-void	display_moves(void)
-{
-	char	*toa;
-	char	*string;
-
-	string = ft_strdup("Moves : \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
-	toa = ft_itoa(game()->count_movements);
-	string = ft_strcat(string, toa);
-	mlx_string_put(w()->mlx, w()->mlx_win, 10, 10, 0x800080, string);
-	free(toa);
-	free(string);
-}
-
-static void	display_refresh(void)
+void	display_refresh(void)
 {
 	int	i;
 	int	j;
@@ -52,6 +39,8 @@ static void	display_refresh(void)
 				display_image(&img()->collectible, j, i);
 			else if (m()->map[i][j] == 'P')
 				display_image(&img()->character_current, j, i);
+			else if (m()->map[i][j] == 'e')
+				display_image(&enmy()->current, j, i);
 			j++;
 		}
 		i++;
@@ -71,7 +60,6 @@ static void	move(int y_mod, int x_mod)
 		game()->p_pos_x += x_mod;
 		game()->p_pos_y += y_mod;
 		game()->count_movements++;
-		//print_moves();
 	}
 	else if (m()->map[game()->p_pos_y][game()->p_pos_x + x_mod] == 'E'
 			&& game()->count_coll == game()->collected_coll)
@@ -102,6 +90,7 @@ int	key_hook(int key, t_display *display)
 	}
 	else if (key == ESC)
 		exit_game(EXIT_SUCCESS, STDOUT_FILENO, "Game exited by user.\n");
+	enemy_patrol();
 	display_refresh();
 	(void)display;
 	return (0);
@@ -111,4 +100,5 @@ void	game_play(void)
 {
 	display_refresh();
 	mlx_key_hook(w()->mlx_win, key_hook, w());
+	mlx_loop_hook(w()->mlx, enemy_sprite, 0);
 }

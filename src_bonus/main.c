@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	map_initialize(argv[1]);
 	w()->mlx = mlx_init();
 	img_initialize();
+	load_enemy();
 	window_initialize(w());
 	game_initialize();
 	game_play();

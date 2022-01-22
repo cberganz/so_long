@@ -10,11 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
-void	print_moves(void)
+void	display_moves(void)
 {
-	ft_putstr_fd("Moves : ", 1);
-	ft_putnbr_fd(game()->count_movements, 1);
-	ft_putchar_fd('\n', 1);
+	char	*toa;
+	char	*string;
+
+	string = ft_strdup("Moves :                ");
+	if (!string)
+		exit_game(EXIT_FAILURE, STDOUT_FILENO, ERR_MEM);
+	toa = ft_itoa(game()->count_movements);
+	ft_strlcpy(string + 8, toa, 15);
+	mlx_string_put(w()->mlx, w()->mlx_win, 10, 10, 0x000000, string);
+	free(toa);
+	free(string);
 }
+
+void	ft_delay(float seconds)
+{
+	clock_t	start;
+
+	start = clock();
+	while((clock() - start) <= seconds * CLOCKS_PER_SEC)
+		;
+}
+
