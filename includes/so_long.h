@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/21 16:07:24 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:11:49 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdio.h> // to remove
 
 /*
-** Erro Messages
+** Error Messages
 */
 
 # define ERR_ARGS "Error.\nInvalid number of arguments.\n"

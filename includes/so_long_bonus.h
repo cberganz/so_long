@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/21 16:07:24 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:14:23 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../libft/include/libft.h"
 # include "../mlx-linux/mlx.h"
@@ -24,7 +24,7 @@
 # include <stdio.h> // to remove
 
 /*
-** Erro Messages
+** Error Messages
 */
 
 # define ERR_ARGS "Error.\nInvalid number of arguments.\n"
@@ -162,10 +162,10 @@ void		display_image(t_tex *t, int i, int j);
 **	Enemy
 */
 
-void	load_enemy(void);
-void	enemy_patrol(void);
-t_enemy	*enmy(void);
-uint8_t	die_zone(void);
+void		load_enemy(void);
+void		enemy_patrol(void);
+t_enemy		*enmy(void);
+uint8_t		die_zone(void);
 
 /*
 **	Exit game
@@ -179,7 +179,7 @@ int			exit_button(char *msg);
 **	Utils
 */
 
-void	display_moves(void);
-void	ft_delay(float seconds);
+void		display_moves(void);
+void		ft_delay(float seconds);
 
 #endif

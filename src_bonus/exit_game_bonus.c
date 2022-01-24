@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_game.c                                        :+:      :+:    :+:   */
+/*   exit_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:23:51 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/21 12:32:57 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:23:53 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void	clear_enemy(void)
 
 int	exit_game(int EXIT_CODE, int STD, char *message, int delay)
 {
-	mlx_loop_end(w()->mlx);
-	display_refresh();
+	if (delay != 1)
+	{
+		mlx_loop_end(w()->mlx);
+		display_refresh();
+	}
 	clear_map();
 	if (STD != STDERR_FILENO)
 	{

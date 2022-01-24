@@ -6,7 +6,7 @@
 #    By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:42:18 by cberganz          #+#    #+#              #
-#    Updated: 2022/01/22 15:16:42 by cberganz         ###   ########.fr        #
+#    Updated: 2022/01/24 11:15:27 by cberganz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,12 +64,12 @@ all: ${NAME}
 $(NAME): $(OBJ)
 	@make -sC ./libft/
 	@make -sC ./mlx-linux/
-	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAGS) -L./libft ${OBJ} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME) -g3
 
 $(NAME_BONUS): $(OBJ_BONUS)
 	@make -sC ./libft/
 	@make -sC ./mlx-linux/
-	$(CC) $(CFLAGS) -L./libft ${OBJ_BONUS} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) -L./libft ${OBJ_BONUS} -lft -Lmlx-linux -lmlx_Linux -L/usr/lib -Ilibmlx_linux -lXext -lX11 -lm -lz -o $(NAME_BONUS) -g3
 
 bonus: $(NAME_BONUS)
 
@@ -83,10 +83,10 @@ ${OBJ}: | ${OBJ_DIRS}
 ${OBJ_BONUS}: | ${OBJ_BONUS_DIRS}
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c ${HEADER}
-	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@ -g3
 
 ${OBJ_BONUS_DIR}%.o: ${SRC_BONUS_DIR}%.c ${HEADER}
-	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	${CC} ${CFLAGS} -I${INCLUDE} -I/usr/include -Imlx_linux -O3 -c $< -o $@ -g3
 
 clean:
 	@make clean -sC ./libft/
