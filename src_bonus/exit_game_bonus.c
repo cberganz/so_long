@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:23:51 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/24 11:23:53 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:41:55 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,44 @@ void	clear_map(void)
 
 void	clear_img(void)
 {
-	mlx_destroy_image(w()->mlx, img()->ground.img);
-	mlx_destroy_image(w()->mlx, img()->wall.img);
-	mlx_destroy_image(w()->mlx, img()->collectible.img);
-	mlx_destroy_image(w()->mlx, img()->exit.img);
-	mlx_destroy_image(w()->mlx, img()->character_front.img);
-	mlx_destroy_image(w()->mlx, img()->character_back.img);
-	mlx_destroy_image(w()->mlx, img()->character_right.img);
-	mlx_destroy_image(w()->mlx, img()->character_left.img);
-	mlx_destroy_image(w()->mlx, img()->character_die.img);
+	if (img()->ground.img)
+		mlx_destroy_image(w()->mlx, img()->ground.img);
+	if (img()->wall.img)
+		mlx_destroy_image(w()->mlx, img()->wall.img);
+	if (img()->collectible.img)
+		mlx_destroy_image(w()->mlx, img()->collectible.img);
+	if (img()->exit.img)
+		mlx_destroy_image(w()->mlx, img()->exit.img);
+	if (img()->character_front.img)
+		mlx_destroy_image(w()->mlx, img()->character_front.img);
+	if (img()->character_back.img)
+		mlx_destroy_image(w()->mlx, img()->character_back.img);
+	if (img()->character_right.img)
+		mlx_destroy_image(w()->mlx, img()->character_right.img);
+	if (img()->character_left.img)
+		mlx_destroy_image(w()->mlx, img()->character_left.img);
+	if (img()->character_left.img)
+		mlx_destroy_image(w()->mlx, img()->character_die.img);
 }
 
 void	clear_enemy(void)
 {
-	mlx_destroy_image(w()->mlx, enmy()->frame1.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame2.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame3.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame4.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame5.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame6.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame7.img);
-	mlx_destroy_image(w()->mlx, enmy()->frame8.img);
+	if (enmy()->frame1.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame1.img);
+	if (enmy()->frame2.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame2.img);
+	if (enmy()->frame3.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame3.img);
+	if (enmy()->frame4.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame4.img);
+	if (enmy()->frame5.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame5.img);
+	if (enmy()->frame6.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame6.img);
+	if (enmy()->frame7.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame7.img);
+	if (enmy()->frame8.img)
+		mlx_destroy_image(w()->mlx, enmy()->frame8.img);
 }
 
 int	exit_game(int EXIT_CODE, int STD, char *message, int delay)

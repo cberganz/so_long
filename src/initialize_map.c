@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:23:13 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/24 11:06:46 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/25 12:44:11 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static uint8_t	is_not_ber(char *path)
 	int	len;
 
 	len = ft_strlen(path);
+	if (len < 5 || *(path + len - 5) == '/')
+		return (1);
 	if (ft_strcmp(path + len - 4, ".ber"))
 		return (1);
 	else

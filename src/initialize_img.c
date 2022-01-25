@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:51:14 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/24 11:06:41 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:45:32 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ t_img	*img(void)
 static void	load_texture(t_tex *t, char *path)
 {
 	t->img = mlx_xpm_file_to_image(w()->mlx, path, &t->width, &t->height);
+	if (t->img == NULL)
+	{
+		clear_img();
+		mlx_destroy_display(w()->mlx);
+		free(w()->mlx);
+		exit_game(EXIT_FAILURE, STDERR_FILENO,
+			"Error.\nWhile loading textures.\n");
+	}
 	t->addr = mlx_get_data_addr(t->img, &t->bits_per_pixel,
 			&t->line_length, &t->endian);
 }

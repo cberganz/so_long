@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/24 11:11:49 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/25 12:51:32 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void		game_play(void);
 void		clear_map(void);
 int			exit_game(int exit, int STD, char *message);
 int			exit_button(char *msg);
+void		clear_img(void);
 
 /*
 **	Utils

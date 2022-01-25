@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/24 11:14:23 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:36:46 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ uint8_t		die_zone(void);
 void		clear_map(void);
 int			exit_game(int exit, int STD, char *message, int delay);
 int			exit_button(char *msg);
+void		clear_img(void);
+void		clear_enemy(void);
 
 /*
 **	Utils
